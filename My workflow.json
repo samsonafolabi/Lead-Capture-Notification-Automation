@@ -1,0 +1,190 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "073515de-19a9-4535-a78e-66e8e25d43f2",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -384,
+        64
+      ],
+      "id": "6682e0f9-8a07-4c19-8e00-61ecda39a7dc",
+      "name": "Webhook1",
+      "webhookId": "073515de-19a9-4535-a78e-66e8e25d43f2"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appEAiWFdDGzKIMZf",
+          "mode": "list",
+          "cachedResultName": "Leads",
+          "cachedResultUrl": "https://airtable.com/appEAiWFdDGzKIMZf"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblRXVg8bFnmicyiU",
+          "mode": "list",
+          "cachedResultName": "Table 1",
+          "cachedResultUrl": "https://airtable.com/appEAiWFdDGzKIMZf/tblRXVg8bFnmicyiU"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json.body.name }}",
+            "Email": "={{ $json.body.email }}",
+            "Message": "={{ $json.body.message }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Message",
+              "displayName": "Message",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New",
+                  "value": "New"
+                },
+                {
+                  "name": "Contacted",
+                  "value": "Contacted"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        -112,
+        64
+      ],
+      "id": "8aba2063-430b-40a7-8c56-a5f9f7edbc5e",
+      "name": "Create a record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "6iHyIUN2DvmfGfeW",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0BSYC3V4QY",
+          "mode": "list",
+          "cachedResultName": "leads"
+        },
+        "text": "=🔔 New lead: {{ $json.fields.Name }} ({{ $json.fields.Email }}) Message: {{ $json.fields.Message }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.5,
+      "position": [
+        112,
+        64
+      ],
+      "id": "72d746f2-377c-4942-ab11-43edd99880a3",
+      "name": "Send a message",
+      "webhookId": "682d788c-bd8c-4b98-80d3-aa911de2f639",
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "gzEJfVuqqakuBMK0",
+          "name": "Slack account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Create a record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "cfe5aad8-4ece-4467-9fcc-34bfbe4feacc",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "69d3e6bdf5c0ef98b0c958de65c433308e4a0a7680aaccd37a7f391b908b1780"
+  },
+  "id": "MVTjvE6U5RyW7esD",
+  "tags": []
+}
