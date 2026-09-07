@@ -53,8 +53,8 @@ Main role is to demonstrate the core building blocks — webhooks, structured da
 
 ## Workflow File
 
-The full n8n workflow (importable JSON) is included in this repo: [`workflow.json`](./workflow.json)
+The full n8n workflow (importable JSON) is included in this repo: [`My workflow.json`](./My workflow.json)
 
 ## Built By
 
-*[Your name / contact info / portfolio link here]*
+*[Afolabi Samson / afolabisamson20@gmail.com]*
