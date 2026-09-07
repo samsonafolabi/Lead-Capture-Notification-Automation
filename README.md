@@ -41,6 +41,10 @@ Send Slack notification (#leads channel)
 
 Each piece here is swappable — the webhook can accept submissions from any frontend or form builder, Airtable can be replaced with a different CRM, and Slack can be swapped for email or SMS depending on how a team communicates.
 
+## Watch the demo here
+
+📹 [Watch the demo video](#) *https://drive.google.com/file/d/1xc77sEg4JsIHonrvhegPazwM7HkqUHrV/view?usp=sharing*
+
 ## Why This Pattern Matters
 
 This is a minimal example of a broader pattern: **event in → structured record out → the right person notified**, with no manual handoff in between. The same shape applies well beyond lead capture:
